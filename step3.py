@@ -23,13 +23,15 @@ with open('cards_lists.pkl','rb') as f:
 X = np.reshape(dataX, (1, 74, len(dataX) * 74))
 Y = dataY
 
+print(np.shape(Y))
+
 # define the LSTM model
 model = Sequential()
 # model.add(Embedding((len(cards) + 1), 128, input_length=74))
-model.add(LSTM(256, input_shape=(None, 74)))
+model.add(LSTM(256, input_shape=(74, len(dataX) * 74)))
 
 # Softmax
-model.add(Dense(len(cards), init='uniform'))
+model.add(Dense(len(cards), kernel_initializer='uniform'))
 model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer='adam')

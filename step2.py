@@ -75,12 +75,12 @@ for deck_list in deck_lists:
     if len(processed_deck_list) == 75:
         x, y = chunk(processed_deck_list)
         processed_deck_lists_x.append(x)
-        processed_deck_lists_y.append(y)
+        processed_deck_lists_y = processed_deck_lists_y + y
         # Create 9 Shuffled versions of the decks as well
         for i in range(0, 9):
             x, y = chunk(random.sample(processed_deck_list, len(processed_deck_list)))
             processed_deck_lists_x.append(x)
-            processed_deck_lists_y.append(y)
+            processed_deck_lists_y = processed_deck_lists_y + y
 
 # Save the all_cards list for later use
 with open('cards_lists.pkl', 'wb') as fp:
