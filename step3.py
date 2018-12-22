@@ -20,15 +20,21 @@ with open('deck_lists_y.pkl','rb') as f:
 with open('cards_lists.pkl','rb') as f:
     cards = pickle.load(f)
 
-X = np.reshape(dataX, (1, 74, len(dataX) * 74))
-Y = dataY
+print(np.shape(dataX))
+print(np.shape(dataY))
 
+print("Reshaping")
+
+X = np.reshape(dataX, (len(dataX) * 74, 74, 1))
+Y = np.reshape(dataY, (962740, 1136))
+
+print(np.shape(X))
 print(np.shape(Y))
 
 # define the LSTM model
 model = Sequential()
 # model.add(Embedding((len(cards) + 1), 128, input_length=74))
-model.add(LSTM(256, input_shape=(74, len(dataX) * 74)))
+model.add(LSTM(256, input_shape=(74, 1)))
 
 # Softmax
 model.add(Dense(len(cards), kernel_initializer='uniform'))
